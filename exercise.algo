@@ -1,0 +1,43 @@
+ALGORITHM countCharacters
+
+VAR
+    character : CHAR;
+    lengthCounter, wordCounter, vowelCounter : INTEGER;
+
+BEGIN
+    // Initializing every counter
+    lengthCounter := 0;
+    wordCounter := 0;
+    vowelCounter := 0;
+
+    // Tracking if we are between words
+    inWord := FALSE;
+
+    REPEAT
+        Read(character);
+        
+        // Increasing the character count
+        lengthCounter := lengthCounter + 1;
+
+        // Checking if the character is a vowel (case-insensitive)
+        IF character = 'a' OR character = 'e' OR character = 'i' OR character = 'o' OR character = 'u' THEN,
+            vowelCounter := vowelCounter + 1;
+        END_IF
+
+        // Checking for start of words
+        IF character <> ' ' AND character <> '.' THEN
+            IF inWord = FALSE THEN
+                wordCounter := wordCounter + 1;
+                inWord := TRUE;
+            END_IF
+        ELSE
+            inWord := FALSE;
+        END_IF
+
+    UNTIL character = '.';
+
+    // Results
+    Write("Length of sentence: ", lengthCounter);
+    Write("Number of words: ", wordCounter);
+    Write("Number of vowels: ", vowelCounter);
+END
